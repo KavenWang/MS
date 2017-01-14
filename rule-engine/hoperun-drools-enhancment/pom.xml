@@ -1,0 +1,323 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hoperun.rd.common</groupId>
+		<artifactId>common-dependencies</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>hoperun-drools-enhancment</artifactId>
+	<packaging>jar</packaging>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.test.skip>true</maven.test.skip>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hoperun.rd.common</groupId>
+			<artifactId>hoperun-drools-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-internal</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-instrument</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<testSourceDirectory>src/test/java/</testSourceDirectory>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+
+
+			</plugins>
+
+		</pluginManagement>
+	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<current.env>dev</current.env>
+			</properties>
+			<repositories>
+				<repository>
+					<id>nexus-snapshots</id>
+					<name>RD Snap</name>
+					<url>http://maven.rd.hoperun.com/nexus/content/repositories/snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+
+				<repository>
+					<id>rd-party</id>
+					<url>http://maven.rd.hoperun.com/nexus/content/repositories/rd-party</url>
+
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<distributionManagement>
+				<snapshotRepository>
+					<id>nexus-snapshots</id>
+					<name>Snapshot</name>
+					<url>http://maven.rd.hoperun.com:8081/nexus/content/repositories/snapshots/</url>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
+
+		<profile>
+			<id>uat1</id>
+			<properties>
+				<current.env>uat1</current.env>
+			</properties>
+
+			<repositories>
+				<repository>
+					<id>nexus-snapshots</id>
+					<name>RD Snap</name>
+					<url>http://maven.rd.hoperun.com/nexus/content/repositories/snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+
+				<repository>
+					<id>rd-party</id>
+					<url>http://maven.rd.hoperun.com/nexus/content/repositories/rd-party</url>
+
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<distributionManagement>
+				<snapshotRepository>
+					<id>nexus-snapshots</id>
+					<name>Snapshot</name>
+					<url>http://maven.rd.hoperun.com:8081/nexus/content/repositories/snapshots/</url>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
+		<profile>
+			<id>sit1</id>
+			<properties>
+				<current.env>sit1</current.env>
+			</properties>
+
+			<repositories>
+				<repository>
+					<id>nexus-snapshots</id>
+					<name>RD Snap</name>
+					<url>http://maven.rd.hoperun.com/nexus/content/repositories/snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+
+				<repository>
+					<id>rd-party</id>
+					<url>http://maven.rd.hoperun.com/nexus/content/repositories/rd-party</url>
+
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<distributionManagement>
+				<snapshotRepository>
+					<id>nexus-snapshots</id>
+					<name>Snapshot</name>
+					<url>http://maven.rd.hoperun.com:8081/nexus/content/repositories/snapshots/</url>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
+		<profile>
+			<id>pre</id>
+			<properties>
+				<current.env>pre</current.env>
+			</properties>
+
+			<repositories>
+				<repository>
+					<id>nexus-snapshots</id>
+					<name>RD Snap</name>
+					<url>http://maven.rd.hoperun.com/nexus/content/repositories/snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+
+				<repository>
+					<id>rd-party</id>
+					<url>http://maven.rd.hoperun.com/nexus/content/repositories/rd-party</url>
+
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<distributionManagement>
+				<snapshotRepository>
+					<id>nexus-snapshots</id>
+					<name>Snapshot</name>
+					<url>http://maven.rd.hoperun.com:8081/nexus/content/repositories/snapshots/</url>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
+		<profile>
+			<id>pro</id>
+			<properties>
+				<current.env>pro</current.env>
+			</properties>
+			<repositories>
+				<repository>
+					<id>nexus-releases</id>
+					<name>RD Release</name>
+					<url>http://maven.rd.hoperun.com/nexus/content/repositories/releases/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+
+				<repository>
+					<id>rd-party</id>
+					<url>http://maven.rd.hoperun.com/nexus/content/repositories/rd-party</url>
+
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<distributionManagement>
+				<repository>
+					<id>nexus-releases</id>
+					<name>Releases</name>
+					<url>http://maven.rd.hoperun.com:8081/nexus/content/repositories/releases/</url>
+				</repository>
+			</distributionManagement>
+		</profile>
+	</profiles>
+</project>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="CON" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d %-5level %logger{80} - %msg %n</pattern>
+		</encoder>
+	</appender>
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- <prudent>true</prudent> -->
+		<file>\${user.home}/logs/hk_retail_out.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>\${user.home}/logs/hk_retail_out.%i.log.zip
+			</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>3</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>2MB</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<pattern>%date [%X{flow}] %-5level %X{ip} %logger{80} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+
+	<root level="info">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="CON" />
+	</root>
+
+</configuration>

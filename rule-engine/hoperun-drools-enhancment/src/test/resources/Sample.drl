@@ -1,0 +1,51 @@
+package com.test;
+ 
+import com.hoperun.rdc.testCommponent.DemoFact;
+ 
+rule "收入条件1"
+    when
+        m : DemoFact( income >=120000, $accountingresult:accounting)
+    then
+        System.out.println( "年入12万，富人+80" );
+        m.setAccounting($accountingresult+80.0 );
+end
+
+rule "收入条件2"
+    when
+        m : DemoFact( income <120000, $accountingresult:accounting)
+    then
+        System.out.println( "年入未到12万，拖后腿的+30" );
+        m.setAccounting($accountingresult+30.0 );
+end
+
+rule "固定资产"
+    when
+       m : DemoFact( fixedAssets <1000000, $accountingresult:accounting)
+    then
+        System.out.println( "100w固定资产都没有，拖后腿的+20" );
+        m.setAccounting($accountingresult+20.0 );
+end
+
+rule "固定资产1"
+    when
+       m : DemoFact( fixedAssets >=1000000, $accountingresult:accounting)
+    then
+        System.out.println( "100w固定资产有，富人+80" );
+        m.setAccounting($accountingresult+80.0 );
+end
+
+rule "年龄"
+    when
+       m : DemoFact( age <20, $accountingresult:accounting)
+    then
+        System.out.println( "年龄小于20, +20" );
+        m.setAccounting($accountingresult+20.0 );
+end
+
+rule "年龄2"
+    when
+       m : DemoFact( country =="CHN", $accountingresult:accounting)
+    then
+        System.out.println( "国别CHN,天朝子民+20" );
+        m.setAccounting($accountingresult+20.0 );
+end
